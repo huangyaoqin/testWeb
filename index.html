@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To my love</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Ma Shan Zheng', cursive;
+            background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .heart {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .main-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .title {
+            font-size: 3em;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            animation: heartBeat 1.5s infinite;
+        }
+
+        .love-letter {
+            background: rgba(255,255,255,0.9);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+        }
+
+        .love-letter:hover {
+            transform: translateY(-10px);
+        }
+
+        .love-letter::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(255,107,107,0.3);
+        }
+
+        .message {
+            font-size: 1.5em;
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards;
+            animation-delay: 1s;
+        }
+
+        .timeline {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 50px 0;
+        }
+
+        .memory-card {
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 15px;
+            width: 280px;
+            text-align: left;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(50px);
+            opacity: 0;
+            animation: slideInUp 0.5s forwards;
+        }
+
+        .memory-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .memory-card:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .memory-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .memory-card h3 {
+            color: #ff6b6b;
+            margin-bottom: 10px;
+        }
+
+        .memory-card p {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Ma Shan Zheng', cursive;
+        }
+
+        .btn-yes {
+            background: #ff6b6b;
+            color: white;
+            box-shadow: 0 5px 15px rgba(255,107,107,0.3);
+        }
+
+        .btn-no {
+            background: #fff;
+            color: #666;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.1); }
+            70% { transform: scale(1); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .floating-hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts" id="hearts"></div>
+    
+    <div class="container main-content">
+        <h1 class="title animate__animated animate__heartBeat">亲爱的，我想对你说</h1>
+        
+        <div class="love-letter">
+            <div class="message">
+                遇见你是我最大的幸运，<br>
+                每一个有你的日子都闪闪发光，<br>
+                想和你一起走过漫长岁月，<br>
+                你愿意做我的女朋友吗？
+            </div>
+        </div>
+
+        <div class="timeline">
+            <div class="memory-card">
+                <img src="https://example.com/first-meet.jpg" alt="初次相遇">
+                <h3>初次相遇</h3>
+                <p>那天阳光正好，你的笑容温暖了我的心</p>
+            </div>
+            <div class="memory-card">
+                <img src="https://example.com/first-date.jpg" alt="第一次约会">
+                <h3>第一次约会</h3>
+                <p>漫步在街头，时光都变得美好</p>
+            </div>
+            <div class="memory-card">
+                <img src="https://example.com/special-moment.jpg" alt="特别时刻">
+                <h3>难忘时光</h3>
+                <p>和你在一起的每一刻都值得珍藏</p>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button class="btn btn-yes" onclick="acceptLove()">我愿意</button>
+            <button class="btn btn-no" onmouseover="moveButton(this)" onclick="rejectLove()">再想想</button>
+        </div>
+    </div>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.innerHTML = '❤️';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            heart.style.position = 'fixed';
+            heart.style.top = '-20px';
+            heart.style.opacity = Math.random() * 0.5 + 0.5;
+            heart.style.animation = `fall ${heart.style.animationDuration} linear`;
+            document.getElementById('hearts').appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, parseFloat(heart.style.animationDuration) * 1000);
+        }
+
+        setInterval(createHeart, 300);
+
+        function moveButton(btn) {
+            btn.style.position = 'relative';
+            btn.style.left = Math.random() * 200 - 100 + 'px';
+            btn.style.top = Math.random() * 200 - 100 + 'px';
+        }
+
+        function acceptLove() {
+            alert('❤️ 太好了！我们在一起吧！❤️');
+            // 这里可以添加更多动画效果
+        }
+
+        function rejectLove() {
+            alert('别想逃走哦～再好好想想吧！');
+        }
+    </script>
+</body>
+</html> 
